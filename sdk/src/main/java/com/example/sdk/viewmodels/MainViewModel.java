@@ -1,6 +1,7 @@
 package com.example.sdk.viewmodels;
 
 import com.example.sdk.R;
+import com.example.sdk.Screens;
 import com.example.sdk.activities.BaseActivity;
 import com.example.sdk.models.ListItem;
 import com.example.sdk.repositories.MainRepository;
@@ -27,7 +28,8 @@ public class MainViewModel extends BaseViewModel {
 
         rendererRecyclerViewAdapter = new RendererRecyclerViewAdapter();
         rendererRecyclerViewAdapter.registerRenderer(
-                new DataBindingRenderer<>(ListItem.class, getContext(), R.layout.layout_list_item, null));
+                new DataBindingRenderer<>(ListItem.class, getContext(), R.layout.layout_list_item,
+                        item -> Screens.showDetails(getContext(), item.getId())));
 
         listConfig = new ListConfig.Builder(rendererRecyclerViewAdapter)
                 .setHasFixedSize(true)
