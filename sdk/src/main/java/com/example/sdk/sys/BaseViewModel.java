@@ -7,7 +7,7 @@ import android.view.View;
 
 public class BaseViewModel extends BaseObservable {
 
-    @BindingAdapter("app:onClick")
+    @BindingAdapter("onClick")
     public static void bindOnClick(View view, final Runnable runnable) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
