@@ -15,10 +15,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class MainViewModel extends BaseViewModel {
 
-    private MainRepository mainRepository;
+    protected MainRepository mainRepository;
 
-    private RendererRecyclerViewAdapter rendererRecyclerViewAdapter;
-    private ListConfig listConfig;
+    protected RendererRecyclerViewAdapter rendererRecyclerViewAdapter;
+    protected ListConfig listConfig;
 
     public MainViewModel(BaseActivity baseActivity, MainRepository repository) {
         super(baseActivity);
@@ -26,14 +26,7 @@ public class MainViewModel extends BaseViewModel {
 
         this.mainRepository = repository;
 
-        rendererRecyclerViewAdapter = new RendererRecyclerViewAdapter();
-        rendererRecyclerViewAdapter.registerRenderer(
-                new DataBindingRenderer<>(ListItem.class, getContext(), R.layout.layout_list_item,
-                        item -> Screens.showDetails(getContext(), item.getId())));
-
-        listConfig = new ListConfig.Builder(rendererRecyclerViewAdapter)
-                .setHasFixedSize(true)
-                .build(baseActivity);
+        createAdapter();
 
         regiserDisposables(
                 mainRepository.getItems()
@@ -43,6 +36,17 @@ public class MainViewModel extends BaseViewModel {
                         setLoading(false);
                     })
         );
+    }
+
+    protected void createAdapter() {
+        rendererRecyclerViewAdapter = new RendererRecyclerViewAdapter();
+        rendererRecyclerViewAdapter.registerRenderer(
+                new DataBindingRenderer<>(ListItem.class, getContext(), R.layout.layout_list_item,
+                        item -> Screens.showDetails(getContext(), item.getId())));
+
+        listConfig = new ListConfig.Builder(rendererRecyclerViewAdapter)
+                .setHasFixedSize(true)
+                .build(getContext());
     }
 
     public ListConfig getListConfig() {

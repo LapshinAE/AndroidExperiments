@@ -3,14 +3,13 @@ package com.example.sdk.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.sdk.MyApplication;
-import com.example.sdk.R;
-import com.example.sdk.databinding.ActivityDetailsBinding;
 import com.example.sdk.di.DaggerMainComponent;
+import com.example.sdk.di.DetailsQualifier;
+import com.example.sdk.sys.ViewBinder;
 import com.example.sdk.viewmodels.DetailsViewModel;
 
 import javax.inject.Inject;
@@ -24,6 +23,10 @@ public class DetailsActivity extends BaseActivity {
         intent.putExtra(DETAILS_ID, detailsId);
         return intent;
     }
+
+    @Inject
+    @DetailsQualifier
+    ViewBinder viewBinder;
 
     @Inject
     DetailsViewModel vm;
@@ -45,9 +48,8 @@ public class DetailsActivity extends BaseActivity {
 
             vm.init(detailsId);
 
-            ActivityDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
-            binding.setVm(vm);
-            registerViewModel(vm);
+            viewBinder.setContentView();
+            registerViewModel(viewBinder.getBaseViewModel());
         } else {
             finish();
         }

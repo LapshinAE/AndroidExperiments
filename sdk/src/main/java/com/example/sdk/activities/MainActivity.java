@@ -1,20 +1,19 @@
 package com.example.sdk.activities;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
 import com.example.sdk.MyApplication;
-import com.example.sdk.R;
-import com.example.sdk.databinding.ActivityMainBinding;
 import com.example.sdk.di.DaggerMainComponent;
-import com.example.sdk.viewmodels.MainViewModel;
+import com.example.sdk.di.MainListQualifier;
+import com.example.sdk.sys.ViewBinder;
 
 import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity {
 
     @Inject
-    MainViewModel vm;
+    @MainListQualifier
+    ViewBinder viewBinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +25,8 @@ public class MainActivity extends BaseActivity {
                 .build()
                 .inject(this);
 
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setVm(vm);
-        registerViewModel(vm);
+        viewBinder.setContentView();
+        registerViewModel(viewBinder.getBaseViewModel());
     }
 
 }
