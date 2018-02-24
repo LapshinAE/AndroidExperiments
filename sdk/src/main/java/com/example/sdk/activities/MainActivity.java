@@ -7,7 +7,6 @@ import com.example.sdk.MyApplication;
 import com.example.sdk.R;
 import com.example.sdk.databinding.ActivityMainBinding;
 import com.example.sdk.di.DaggerMainComponent;
-import com.example.sdk.di.MainModule;
 import com.example.sdk.viewmodels.MainViewModel;
 
 import javax.inject.Inject;
@@ -23,7 +22,7 @@ public class MainActivity extends BaseActivity {
 
         DaggerMainComponent.builder()
                 .applicationComponent(MyApplication.getApp(this).getApplicationComponent())
-                .mainModule(new MainModule(this))
+                .mainModule(MyApplication.getApp(this).getModulesProvider().createMainModule(this))
                 .build()
                 .inject(this);
 

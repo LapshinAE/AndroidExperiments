@@ -4,20 +4,25 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.sdk.di.ApplicationComponent;
-import com.example.sdk.di.ApplicationModule;
 import com.example.sdk.di.DaggerApplicationComponent;
+
+import dimodules.ModulesProvider;
 
 
 public class MyApplication extends Application {
 
     private ApplicationComponent applicationComponent;
 
+    private ModulesProvider modulesProvider;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
+        modulesProvider = buildModulesProvider();
+
         applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
+                .applicationModule(modulesProvider.createAppModule(this))
                 .build();
     }
 
@@ -27,5 +32,13 @@ public class MyApplication extends Application {
 
     public ApplicationComponent getApplicationComponent() {
         return applicationComponent;
+    }
+
+    protected ModulesProvider buildModulesProvider() {
+        return new ModulesProvider();
+    }
+
+    public ModulesProvider getModulesProvider() {
+        return modulesProvider;
     }
 }
