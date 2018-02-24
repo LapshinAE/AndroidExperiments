@@ -26,7 +26,7 @@ public class FirstFeatureListActivity extends BaseActivity {
                 .build()
                 .inject(this);
 
-        viewBinder.setContentView();
+        viewBinder.setContentView(this);
         registerViewModel(viewBinder.getBaseViewModel());
     }
 

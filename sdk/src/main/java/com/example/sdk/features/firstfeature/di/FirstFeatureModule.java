@@ -29,7 +29,7 @@ public class FirstFeatureModule extends ActivityModule {
     @FirstFeatureListQualifier
     @Provides
     public ViewBinder provideMainViewBinder(FirstFeatureListViewModel mainViewModel) {
-        return new ViewBinder(baseActivity, R.layout.activity_main, mainViewModel);
+        return new ViewBinder(R.layout.activity_main, mainViewModel);
     }
 
 
@@ -43,6 +43,6 @@ public class FirstFeatureModule extends ActivityModule {
     @DetailsQualifier
     @Provides
     public ViewBinder provideDetailsViewBinder(FirstFeatureDetailsViewModel viewModel) {
-        return new ViewBinder(baseActivity, R.layout.activity_details, viewModel);
+        return new ViewBinder(R.layout.activity_details, viewModel);
     }
 }

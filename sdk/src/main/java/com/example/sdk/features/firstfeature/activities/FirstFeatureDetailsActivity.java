@@ -49,7 +49,7 @@ public class FirstFeatureDetailsActivity extends BaseActivity {
 
             vm.init(detailsId);
 
-            viewBinder.setContentView();
+            viewBinder.setContentView(this);
             registerViewModel(viewBinder.getBaseViewModel());
         } else {
             finish();
