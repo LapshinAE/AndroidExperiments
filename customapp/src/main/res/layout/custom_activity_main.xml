@@ -10,7 +10,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.sdk.activities.MainActivity">
+        tools:context="com.example.sdk.features.firstfeature.activities.FirstFeatureListActivity">
 
         <android.support.v4.widget.ContentLoadingProgressBar
             style="?android:attr/progressBarStyle"

@@ -3,7 +3,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.sdk.models.ListItem"/>
+            type="com.example.sdk.features.firstfeature.models.ListItem"/>
     </data>
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

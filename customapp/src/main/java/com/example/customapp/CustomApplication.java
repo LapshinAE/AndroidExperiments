@@ -2,11 +2,11 @@ package com.example.customapp;
 
 import android.app.Application;
 
-import com.example.sdk.MyApplication;
-import com.example.sdk.activities.BaseActivity;
-import com.example.sdk.di.ApplicationModule;
-import com.example.sdk.di.MainModule;
-import com.example.sdk.dimodules.ModulesProvider;
+import com.example.sdk.commons.MyApplication;
+import com.example.sdk.commons.activities.BaseActivity;
+import com.example.sdk.commons.di.ApplicationModule;
+import com.example.sdk.features.firstfeature.di.FirstFeatureModule;
+import com.example.sdk.commons.dimodules.ModulesProvider;
 
 
 public class CustomApplication extends MyApplication {
@@ -21,7 +21,7 @@ public class CustomApplication extends MyApplication {
             }
 
             @Override
-            public MainModule createMainModule(BaseActivity baseActivity) {
+            public FirstFeatureModule createFirstFeatureModule(BaseActivity baseActivity) {
                 return new CustomMainModule(baseActivity);
             }
         };

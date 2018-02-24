@@ -6,23 +6,23 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.sdk.Screens;
-import com.example.sdk.activities.BaseActivity;
+import com.example.sdk.commons.Screens;
+import com.example.sdk.commons.activities.BaseActivity;
 import com.example.sdk.databinding.LayoutListItemBinding;
-import com.example.sdk.models.ListItem;
-import com.example.sdk.repositories.MainRepository;
-import com.example.sdk.sys.DataBindingRenderer;
-import com.example.sdk.sys.ListConfig;
-import com.example.sdk.sys.RecyclerViewHolder;
-import com.example.sdk.viewmodels.MainViewModel;
+import com.example.sdk.features.firstfeature.models.ListItem;
+import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepository;
+import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureListViewModel;
+import com.example.sdk.commons.sys.DataBindingRenderer;
+import com.example.sdk.commons.sys.ListConfig;
+import com.example.sdk.commons.sys.RecyclerViewHolder;
 import com.github.vivchar.rendererrecyclerviewadapter.RendererRecyclerViewAdapter;
 
 
-public class CustomMainViewModel extends MainViewModel {
+public class CustomMainViewModel extends FirstFeatureListViewModel {
 
     private ObservableField<String> scrolledPosition = new ObservableField<String>("0");
 
-    public CustomMainViewModel(BaseActivity baseActivity, MainRepository repository) {
+    public CustomMainViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
         super(baseActivity, repository);
     }
 
