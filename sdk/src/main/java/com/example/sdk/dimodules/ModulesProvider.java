@@ -1,4 +1,4 @@
-package dimodules;
+package com.example.sdk.dimodules;
 
 
 import android.app.Application;

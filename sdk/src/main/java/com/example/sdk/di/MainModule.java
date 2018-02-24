@@ -17,13 +17,13 @@ public class MainModule extends ActivityModule {
 
     @PerActivity
     @Provides
-    MainViewModel provideMainViewModel(BaseActivity baseActivity, MainRepository mainRepository) {
+    public MainViewModel provideMainViewModel(BaseActivity baseActivity, MainRepository mainRepository) {
         return new MainViewModel(baseActivity, mainRepository);
     }
 
     @PerActivity
     @Provides
-    DetailsViewModel provideDetailsViewModel(BaseActivity baseActivity, MainRepository mainRepository) {
+    public DetailsViewModel provideDetailsViewModel(BaseActivity baseActivity, MainRepository mainRepository) {
         return new DetailsViewModel(baseActivity, mainRepository);
     }
 }

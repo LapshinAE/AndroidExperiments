@@ -6,7 +6,7 @@ import android.content.Context;
 import com.example.sdk.di.ApplicationComponent;
 import com.example.sdk.di.DaggerApplicationComponent;
 
-import dimodules.ModulesProvider;
+import com.example.sdk.dimodules.ModulesProvider;
 
 
 public class MyApplication extends Application {

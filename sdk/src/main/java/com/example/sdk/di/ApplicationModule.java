@@ -29,7 +29,7 @@ public class ApplicationModule {
 
     @Singleton
     @Provides
-    MainRepository provideMainRepository() {
+    public MainRepository provideMainRepository() {
         return new MainRepositoriesImpl();
     }
 }
