@@ -7,10 +7,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.sdk.MyApplication;
 import com.example.sdk.R;
 import com.example.sdk.databinding.ActivityDetailsBinding;
-import com.example.sdk.repositories.MainRepositoriesImpl;
+import com.example.sdk.di.DaggerMainComponent;
+import com.example.sdk.di.MainModule;
 import com.example.sdk.viewmodels.DetailsViewModel;
+
+import javax.inject.Inject;
 
 public class DetailsActivity extends BaseActivity {
 
@@ -22,16 +26,24 @@ public class DetailsActivity extends BaseActivity {
         return intent;
     }
 
+    @Inject
+    DetailsViewModel vm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        DaggerMainComponent.builder()
+                .applicationComponent(MyApplication.getApp(this).getApplicationComponent())
+                .mainModule(new MainModule(this))
+                .build()
+                .inject(this);
+
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DETAILS_ID)) {
             int detailsId = intent.getIntExtra(DETAILS_ID, 0);
 
-            DetailsViewModel vm = new DetailsViewModel(this, new MainRepositoriesImpl());
             vm.init(detailsId);
 
             ActivityDetailsBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
