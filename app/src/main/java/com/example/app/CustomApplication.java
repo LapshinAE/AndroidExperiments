@@ -1,4 +1,4 @@
-package com.example.lapshin.remotoexperimets;
+package com.example.app;
 
 import com.example.sdk.MyApplication;
 
