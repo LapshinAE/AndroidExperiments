@@ -6,18 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.sdk.commons.MyApplication;
-import com.example.sdk.commons.activities.BaseActivity;
 import com.example.sdk.commons.sys.ViewBinder;
-import com.example.sdk.features.firstfeature.di.FirstFeatureDetailsQualifier;
 import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureDetailsViewModel;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import toothpick.Scope;
-import toothpick.Toothpick;
+public class FirstFeatureDetailsActivity extends FirstFeatureBaseActivity {
 
-public class FirstFeatureDetailsActivity extends BaseActivity {
+    public static final String NAME = "first_feature_details";
 
     private static final String DETAILS_ID = "details_id";
 
@@ -28,7 +25,7 @@ public class FirstFeatureDetailsActivity extends BaseActivity {
     }
 
     @Inject
-    @FirstFeatureDetailsQualifier
+    @Named(NAME)
     ViewBinder viewBinder;
 
     @Inject
@@ -38,11 +35,6 @@ public class FirstFeatureDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Scope scope = Toothpick.openScopes(MyApplication.getApp(this), this);
-        scope.installModules(MyApplication.getApp(this).getModulesProvider().createFirstFeatureModule(this, scope));
-        Toothpick.inject(this, scope);
-        Toothpick.closeScope(this);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DETAILS_ID)) {

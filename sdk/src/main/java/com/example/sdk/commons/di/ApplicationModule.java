@@ -15,10 +15,6 @@ public class ApplicationModule extends Module {
     public ApplicationModule(Application application) {
         this.application = application;
 
-        bindFirstFeatureRepository();
-    }
-
-    protected void bindFirstFeatureRepository() {
         bind(FirstFeatureRepository.class).to(FirstFeatureRepositoryImpl.class).singletonInScope();
     }
 }

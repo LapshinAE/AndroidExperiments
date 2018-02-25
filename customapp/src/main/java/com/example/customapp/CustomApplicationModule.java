@@ -14,13 +14,11 @@ import java.util.List;
 import io.reactivex.Single;
 
 
-public class CustomApplicationModule extends ApplicationModule {
+class CustomApplicationModule extends ApplicationModule {
+
     CustomApplicationModule(Application application) {
         super(application);
-    }
 
-    @Override
-    protected void bindFirstFeatureRepository() {
         bind(FirstFeatureRepository.class).toProviderInstance(CustomFirstFeatureRepository::new);
     }
 
