@@ -1,35 +1,24 @@
 package com.example.sdk.commons.di;
 
+
 import android.app.Application;
-import android.content.Context;
 
-import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepositoryImpl;
 import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepository;
+import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepositoryImpl;
 
-import javax.inject.Singleton;
+import toothpick.config.Module;
 
-import dagger.Module;
-import dagger.Provides;
-
-@Module
-public class ApplicationModule {
+public class ApplicationModule extends Module {
 
     private Application application;
 
     public ApplicationModule(Application application) {
         this.application = application;
+
+        bindFirstFeatureRepository();
     }
 
-    @Singleton
-    @Provides
-    @ApplicationContext
-    Context provideContext() {
-        return application;
-    }
-
-    @Singleton
-    @Provides
-    public FirstFeatureRepository provideMainRepository() {
-        return new FirstFeatureRepositoryImpl();
+    protected void bindFirstFeatureRepository() {
+        bind(FirstFeatureRepository.class).to(FirstFeatureRepositoryImpl.class).singletonInScope();
     }
 }

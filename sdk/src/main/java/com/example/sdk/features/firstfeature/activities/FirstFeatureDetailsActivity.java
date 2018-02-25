@@ -8,12 +8,14 @@ import android.view.MenuItem;
 
 import com.example.sdk.commons.MyApplication;
 import com.example.sdk.commons.activities.BaseActivity;
-import com.example.sdk.features.firstfeature.di.DaggerFirstFeatureComponent;
-import com.example.sdk.features.firstfeature.di.DetailsQualifier;
-import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureDetailsViewModel;
 import com.example.sdk.commons.sys.ViewBinder;
+import com.example.sdk.features.firstfeature.di.FirstFeatureDetailsQualifier;
+import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureDetailsViewModel;
 
 import javax.inject.Inject;
+
+import toothpick.Scope;
+import toothpick.Toothpick;
 
 public class FirstFeatureDetailsActivity extends BaseActivity {
 
@@ -26,7 +28,7 @@ public class FirstFeatureDetailsActivity extends BaseActivity {
     }
 
     @Inject
-    @DetailsQualifier
+    @FirstFeatureDetailsQualifier
     ViewBinder viewBinder;
 
     @Inject
@@ -37,11 +39,10 @@ public class FirstFeatureDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        DaggerFirstFeatureComponent.builder()
-                .applicationComponent(MyApplication.getApp(this).getApplicationComponent())
-                .firstFeatureModule(MyApplication.getApp(this).getModulesProvider().createFirstFeatureModule(this))
-                .build()
-                .inject(this);
+        Scope scope = Toothpick.openScopes(MyApplication.getApp(this), this);
+        scope.installModules(MyApplication.getApp(this).getModulesProvider().createFirstFeatureModule(this, scope));
+        Toothpick.inject(this, scope);
+        Toothpick.closeScope(this);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DETAILS_ID)) {

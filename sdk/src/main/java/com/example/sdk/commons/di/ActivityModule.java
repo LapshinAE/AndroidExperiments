@@ -2,11 +2,21 @@ package com.example.sdk.commons.di;
 
 import com.example.sdk.commons.activities.BaseActivity;
 
-public class ActivityModule {
+import toothpick.Scope;
+import toothpick.config.Module;
 
-    protected BaseActivity baseActivity;
 
-    public ActivityModule(BaseActivity activity) {
-        baseActivity = activity;
+public class ActivityModule extends Module {
+
+    private Scope scope;
+
+    public ActivityModule(BaseActivity baseActivity, Scope scope) {
+        this.scope = scope;
+        bind(BaseActivity.class).toInstance(baseActivity);
     }
+
+    public Scope getScope() {
+        return scope;
+    }
+
 }

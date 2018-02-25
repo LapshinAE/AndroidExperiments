@@ -8,13 +8,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.sdk.commons.Screens;
 import com.example.sdk.commons.activities.BaseActivity;
+import com.example.sdk.commons.sys.DataBindingRenderer;
+import com.example.sdk.commons.sys.ListConfig;
+import com.example.sdk.commons.sys.RecyclerViewHolder;
 import com.example.sdk.databinding.LayoutListItemBinding;
 import com.example.sdk.features.firstfeature.models.ListItem;
 import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepository;
 import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureListViewModel;
-import com.example.sdk.commons.sys.DataBindingRenderer;
-import com.example.sdk.commons.sys.ListConfig;
-import com.example.sdk.commons.sys.RecyclerViewHolder;
 import com.github.vivchar.rendererrecyclerviewadapter.RendererRecyclerViewAdapter;
 
 
@@ -22,7 +22,7 @@ public class CustomMainViewModel extends FirstFeatureListViewModel {
 
     private ObservableField<String> scrolledPosition = new ObservableField<String>("0");
 
-    public CustomMainViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
+    CustomMainViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
         super(baseActivity, repository);
     }
 

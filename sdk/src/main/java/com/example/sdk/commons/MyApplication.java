@@ -3,14 +3,13 @@ package com.example.sdk.commons;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.sdk.commons.di.ApplicationComponent;
-import com.example.sdk.commons.di.DaggerApplicationComponent;
 import com.example.sdk.commons.dimodules.ModulesProvider;
+
+import toothpick.Scope;
+import toothpick.Toothpick;
 
 
 public class MyApplication extends Application {
-
-    private ApplicationComponent applicationComponent;
 
     private ModulesProvider modulesProvider;
 
@@ -20,17 +19,12 @@ public class MyApplication extends Application {
 
         modulesProvider = buildModulesProvider();
 
-        applicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(modulesProvider.createAppModule(this))
-                .build();
+        Scope appScope = Toothpick.openScope(this);
+        appScope.installModules(modulesProvider.createAppModule(this));
     }
 
     public static MyApplication getApp(Context context) {
         return (MyApplication) context.getApplicationContext();
-    }
-
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
     }
 
     protected ModulesProvider buildModulesProvider() {

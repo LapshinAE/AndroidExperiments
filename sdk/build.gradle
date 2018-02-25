@@ -38,6 +38,6 @@ dependencies {
 
     compile 'com.github.vivchar:RendererRecyclerViewAdapter:2.5.1'
 
-    compile "com.google.dagger:dagger:2.11"
-    annotationProcessor "com.google.dagger:dagger-compiler:2.11"
+    compile 'com.github.stephanenicolas.toothpick:toothpick-runtime:1.1.1'
+    annotationProcessor 'com.github.stephanenicolas.toothpick:toothpick-compiler:1.1.1'
 }

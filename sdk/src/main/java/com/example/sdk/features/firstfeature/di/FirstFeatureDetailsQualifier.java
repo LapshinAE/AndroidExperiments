@@ -1,4 +1,4 @@
-package com.example.sdk.commons.di;
+package com.example.sdk.features.firstfeature.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -7,5 +7,5 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ActivityContext {
+public @interface FirstFeatureDetailsQualifier {
 }

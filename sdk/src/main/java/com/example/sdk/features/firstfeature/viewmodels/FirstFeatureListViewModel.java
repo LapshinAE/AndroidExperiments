@@ -10,6 +10,8 @@ import com.example.sdk.commons.sys.DataBindingRenderer;
 import com.example.sdk.commons.sys.ListConfig;
 import com.github.vivchar.rendererrecyclerviewadapter.RendererRecyclerViewAdapter;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
@@ -20,6 +22,7 @@ public class FirstFeatureListViewModel extends BaseViewModel {
     protected RendererRecyclerViewAdapter rendererRecyclerViewAdapter;
     protected ListConfig listConfig;
 
+    @Inject
     public FirstFeatureListViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
         super(baseActivity);
         setLoading(true);
