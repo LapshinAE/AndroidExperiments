@@ -8,6 +8,7 @@ import com.example.sdk.commons.sys.ViewBinder;
 
 
 public class CustomMainModule extends FirstFeatureModule {
+
     public CustomMainModule(BaseActivity activity) {
         super(activity);
     }
@@ -19,6 +20,6 @@ public class CustomMainModule extends FirstFeatureModule {
 
     @Override
     public ViewBinder provideMainViewBinder( FirstFeatureListViewModel mainViewModel) {
-        return new ViewBinder(baseActivity, R.layout.custom_activity_main, mainViewModel);
+        return new ViewBinder(R.layout.custom_activity_main, mainViewModel);
     }
 }
