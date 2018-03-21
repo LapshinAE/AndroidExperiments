@@ -18,7 +18,10 @@ class CustomApplicationModule extends ApplicationModule {
 
     CustomApplicationModule(Application application) {
         super(application);
+    }
 
+    @Override
+    protected void bindRepository() {
         bind(FirstFeatureRepository.class).toProviderInstance(CustomFirstFeatureRepository::new);
     }
 
