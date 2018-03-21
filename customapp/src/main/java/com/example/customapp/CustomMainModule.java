@@ -14,6 +14,11 @@ class CustomMainModule extends FirstFeatureModule {
 
     CustomMainModule(BaseActivity activity, Scope scope) {
         super(activity, scope);
+    }
+
+    @Override
+    protected void bindList() {
+        Scope scope = getScope();
 
         bind(FirstFeatureListViewModel.class).toProviderInstance(() ->
                 new CustomMainViewModel(scope.getInstance(BaseActivity.class), scope.getInstance(FirstFeatureRepository.class)));

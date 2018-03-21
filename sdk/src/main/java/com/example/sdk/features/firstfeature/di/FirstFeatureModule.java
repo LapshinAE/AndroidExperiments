@@ -15,13 +15,17 @@ public class FirstFeatureModule extends ActivityModule {
     public FirstFeatureModule(BaseActivity baseActivity, toothpick.Scope scope) {
         super(baseActivity, scope);
 
-        bind(FirstFeatureListViewModel.class).singletonInScope();
-        bind(ViewBinder.class).withName(FirstFeatureListActivity.NAME).toProviderInstance(() ->
-                new ViewBinder(R.layout.activity_main, getScope().getInstance(FirstFeatureListViewModel.class)));
+        bindList();
 
         bind(FirstFeatureDetailsViewModel.class).singletonInScope();
         bind(ViewBinder.class).withName(FirstFeatureDetailsActivity.NAME).toProviderInstance(() ->
                 new ViewBinder(R.layout.activity_details, getScope().getInstance(FirstFeatureDetailsViewModel.class)));
+    }
+
+    protected void bindList() {
+        bind(FirstFeatureListViewModel.class).singletonInScope();
+        bind(ViewBinder.class).withName(FirstFeatureListActivity.NAME).toProviderInstance(() ->
+                new ViewBinder(R.layout.activity_main, getScope().getInstance(FirstFeatureListViewModel.class)));
     }
 
 }
