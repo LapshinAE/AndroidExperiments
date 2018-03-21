@@ -11,6 +11,9 @@ import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepository
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import io.reactivex.Single;
 
 
@@ -22,10 +25,22 @@ class CustomApplicationModule extends ApplicationModule {
 
     @Override
     protected void bindRepository() {
-        bind(FirstFeatureRepository.class).toProviderInstance(CustomFirstFeatureRepository::new);
+        //bind(FirstFeatureRepository.class).to(CustomFirstFeatureRepository.class); // не работает
+        bind(FirstFeatureRepository.class).toProviderInstance(new Provider<FirstFeatureRepository>() {
+            @Override
+            public FirstFeatureRepository get() {
+                return new CustomFirstFeatureRepository();
+            }
+        }); // работает, но если объект который создается в провайдере имеет зависимости, то возникают проблемы. В ветке toothpick есть костыльное решение
     }
 
-    private static class CustomFirstFeatureRepository extends FirstFeatureRepositoryImpl {
+    public static class CustomFirstFeatureRepository extends FirstFeatureRepositoryImpl {
+
+        @Inject
+        public CustomFirstFeatureRepository() {
+            super();
+        }
+
         @Override
         public Single<List<ListItem>> getItems() {
             return super.getItems()

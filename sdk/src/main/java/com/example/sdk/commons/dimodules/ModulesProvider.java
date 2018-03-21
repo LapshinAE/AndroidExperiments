@@ -15,8 +15,8 @@ public class ModulesProvider {
         return new ApplicationModule(application);
     }
 
-    public FirstFeatureModule createFirstFeatureModule(BaseActivity baseActivity, Scope scope) {
-        return new FirstFeatureModule(baseActivity, scope);
+    public FirstFeatureModule createFirstFeatureModule(BaseActivity baseActivity) {
+        return new FirstFeatureModule(baseActivity);
     }
 
 }

@@ -23,8 +23,8 @@ public class CustomApplication extends MyApplication {
             }
 
             @Override
-            public FirstFeatureModule createFirstFeatureModule(BaseActivity baseActivity, Scope scope) {
-                return new CustomMainModule(baseActivity, scope);
+            public FirstFeatureModule createFirstFeatureModule(BaseActivity baseActivity) {
+                return new CustomMainModule(baseActivity);
             }
         };
     }
