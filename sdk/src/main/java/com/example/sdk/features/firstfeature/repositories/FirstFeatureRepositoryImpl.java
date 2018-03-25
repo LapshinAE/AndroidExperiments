@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.Single;
 
 
@@ -17,6 +19,7 @@ public class FirstFeatureRepositoryImpl implements FirstFeatureRepository {
     private List<ListItem> items;
     private Map<Integer, ItemDetail> details;
 
+    @Inject
     public FirstFeatureRepositoryImpl() {
         items = new ArrayList<>();
         details = new HashMap<>();

@@ -7,6 +7,8 @@ import com.example.sdk.features.firstfeature.models.ItemDetail;
 import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepository;
 import com.example.sdk.commons.sys.BaseViewModel;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
@@ -16,6 +18,7 @@ public class FirstFeatureDetailsViewModel extends BaseViewModel {
 
     private ObservableField<ItemDetail> details = new ObservableField<>();
 
+    @Inject
     public FirstFeatureDetailsViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
         super(baseActivity);
         this.mainRepository = repository;

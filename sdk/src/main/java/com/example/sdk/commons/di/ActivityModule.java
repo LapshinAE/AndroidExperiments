@@ -2,11 +2,13 @@ package com.example.sdk.commons.di;
 
 import com.example.sdk.commons.activities.BaseActivity;
 
-public class ActivityModule {
+import toothpick.config.Module;
 
-    protected BaseActivity baseActivity;
 
-    public ActivityModule(BaseActivity activity) {
-        baseActivity = activity;
+public class ActivityModule extends Module {
+
+    public ActivityModule(BaseActivity baseActivity) {
+        bind(BaseActivity.class).toInstance(baseActivity);
     }
+
 }

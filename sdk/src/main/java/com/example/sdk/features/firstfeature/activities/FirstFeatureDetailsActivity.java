@@ -6,16 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.sdk.commons.MyApplication;
-import com.example.sdk.commons.activities.BaseActivity;
-import com.example.sdk.features.firstfeature.di.DaggerFirstFeatureComponent;
-import com.example.sdk.features.firstfeature.di.DetailsQualifier;
-import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureDetailsViewModel;
 import com.example.sdk.commons.sys.ViewBinder;
+import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureDetailsViewModel;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-public class FirstFeatureDetailsActivity extends BaseActivity {
+public class FirstFeatureDetailsActivity extends FirstFeatureBaseActivity {
+
+    public static final String NAME = "first_feature_details";
 
     private static final String DETAILS_ID = "details_id";
 
@@ -26,7 +25,7 @@ public class FirstFeatureDetailsActivity extends BaseActivity {
     }
 
     @Inject
-    @DetailsQualifier
+    @Named(NAME)
     ViewBinder viewBinder;
 
     @Inject
@@ -36,12 +35,6 @@ public class FirstFeatureDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        DaggerFirstFeatureComponent.builder()
-                .applicationComponent(MyApplication.getApp(this).getApplicationComponent())
-                .firstFeatureModule(MyApplication.getApp(this).getModulesProvider().createFirstFeatureModule(this))
-                .build()
-                .inject(this);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(DETAILS_ID)) {

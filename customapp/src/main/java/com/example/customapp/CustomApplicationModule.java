@@ -14,35 +14,37 @@ import java.util.List;
 import io.reactivex.Single;
 
 
-public class CustomApplicationModule extends ApplicationModule {
-    public CustomApplicationModule(Application application) {
+class CustomApplicationModule extends ApplicationModule {
+
+    CustomApplicationModule(Application application) {
         super(application);
     }
 
     @Override
-    public FirstFeatureRepository provideMainRepository() {
-        return new FirstFeatureRepositoryImpl() {
-            @Override
-            public Single<List<ListItem>> getItems() {
-                return super.getItems()
-                        .map(listItems -> {
-                            List<ListItem> items = new ArrayList<>();
-                            for (ListItem item : listItems) {
-                                items.add(new ListItem(item.getId(), "Custom " + item.getName()));
-                            }
-                            return items;
-                        });
-            }
-
-            @Override
-            public Single<ItemDetail> getDetails(int id) {
-                return super.getDetails(id).map(itemDetail ->
-                        new ItemDetail(itemDetail.getId(),
-                                "Custom " + itemDetail.getName(),
-                                "Custom " + itemDetail.getDescription()));
-            }
-        };
+    protected void bindRepository() {
+        bind(FirstFeatureRepository.class).toProviderInstance(CustomFirstFeatureRepository::new);
     }
 
+    private static class CustomFirstFeatureRepository extends FirstFeatureRepositoryImpl {
+        @Override
+        public Single<List<ListItem>> getItems() {
+            return super.getItems()
+                    .map(listItems -> {
+                        List<ListItem> items = new ArrayList<>();
+                        for (ListItem item : listItems) {
+                            items.add(new ListItem(item.getId(), "Custom " + item.getName()));
+                        }
+                        return items;
+                    });
+        }
+
+        @Override
+        public Single<ItemDetail> getDetails(int id) {
+            return super.getDetails(id).map(itemDetail ->
+                    new ItemDetail(itemDetail.getId(),
+                            "Custom " + itemDetail.getName(),
+                            "Custom " + itemDetail.getDescription()));
+        }
+    }
 
 }
