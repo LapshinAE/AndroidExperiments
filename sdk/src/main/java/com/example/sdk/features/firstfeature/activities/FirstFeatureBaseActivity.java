@@ -17,7 +17,7 @@ public class FirstFeatureBaseActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         Scope scope = Toothpick.openScopes(MyApplication.getApp(this), this);
-        scope.installModules(MyApplication.getApp(this).getModulesProvider().createFirstFeatureModule(this, scope));
+        scope.installModules(MyApplication.getApp(this).getModulesProvider().createFirstFeatureModule(this));
         Toothpick.inject(this, scope);
         Toothpick.closeScope(this);
     }

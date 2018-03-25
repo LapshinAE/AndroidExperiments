@@ -1,28 +1,54 @@
 package com.example.customapp;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.example.sdk.commons.activities.BaseActivity;
 import com.example.sdk.commons.sys.ViewBinder;
 import com.example.sdk.features.firstfeature.activities.FirstFeatureListActivity;
 import com.example.sdk.features.firstfeature.di.FirstFeatureModule;
-import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepository;
 import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureListViewModel;
 
-import toothpick.Scope;
+import javax.inject.Inject;
+
+import toothpick.config.Binding;
 
 
 class CustomMainModule extends FirstFeatureModule {
 
-    CustomMainModule(BaseActivity activity, Scope scope) {
-        super(activity, scope);
+    public CustomMainModule(BaseActivity baseActivity) {
+        super(baseActivity);
+
+        rebind(FirstFeatureListViewModel.class).to(CustomMainViewModel.class);
+        rebindWithName(ViewBinder.class, FirstFeatureListActivity.NAME).to(CustomListViewBinder.class);
     }
 
-    @Override
-    protected void bindList() {
-        Scope scope = getScope();
+    public static class CustomListViewBinder extends ViewBinder {
 
-        bind(FirstFeatureListViewModel.class).toProviderInstance(() ->
-                new CustomMainViewModel(scope.getInstance(BaseActivity.class), scope.getInstance(FirstFeatureRepository.class)));
-        bind(ViewBinder.class).withName(FirstFeatureListActivity.NAME).toProviderInstance(() ->
-                new ViewBinder(R.layout.custom_activity_main, scope.getInstance(FirstFeatureListViewModel.class)));
+        @Inject
+        public CustomListViewBinder(FirstFeatureListViewModel viewModel) {
+            super(R.layout.custom_activity_main, viewModel);
+        }
     }
+
+    protected <T> Binding<T> rebind(@NonNull Class<T> key) {
+        return rebindWithName(key, null);
+    }
+
+    protected <T> Binding<T> rebindWithName(@NonNull Class<T> key, @Nullable String name) {
+        Binding oldBinding = null;
+        for(Binding binding : getBindingSet()) {
+            if (binding.getKey().equals(key) &&
+                    (name == null || binding.getName() != null && binding.getName().equals(name))) {
+                oldBinding = binding;
+            }
+        }
+
+        if (oldBinding != null) {
+            getBindingSet().remove(oldBinding);
+        }
+
+        return bind(key).withName(name);
+    }
+
 }

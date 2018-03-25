@@ -17,11 +17,14 @@ import com.example.sdk.features.firstfeature.repositories.FirstFeatureRepository
 import com.example.sdk.features.firstfeature.viewmodels.FirstFeatureListViewModel;
 import com.github.vivchar.rendererrecyclerviewadapter.RendererRecyclerViewAdapter;
 
+import javax.inject.Inject;
+
 
 public class CustomMainViewModel extends FirstFeatureListViewModel {
 
     private ObservableField<String> scrolledPosition = new ObservableField<String>("0");
 
+    @Inject
     CustomMainViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
         super(baseActivity, repository);
     }
