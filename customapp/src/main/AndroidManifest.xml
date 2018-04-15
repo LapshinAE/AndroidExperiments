@@ -10,14 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.sdk.features.firstfeature.activities.FirstFeatureListActivity">
+
+
+        <activity android:name="com.example.sdk.features.feature1.Feature1Activity1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.sdk.features.firstfeature.activities.FirstFeatureDetailsActivity"/>
+        <activity android:name="com.example.sdk.features.feature2.Feature2Activity1"/>
+        <activity android:name="com.example.sdk.features.feature3.Feature3Activity1"/>
+
+
     </application>
 
 </manifest>

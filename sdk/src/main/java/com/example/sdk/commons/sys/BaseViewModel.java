@@ -4,10 +4,13 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.sdk.commons.activities.BaseActivity;
+import com.example.sdk.commons.routing.BaseRouter;
+import com.example.sdk.commons.routing.Router;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -15,22 +18,19 @@ import io.reactivex.disposables.Disposable;
 
 public class BaseViewModel extends BaseObservable {
 
-    private BaseActivity baseActivity;
+
+    private BaseRouter router;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private ObservableBoolean isLoading = new ObservableBoolean(false);
 
-    public BaseViewModel(BaseActivity baseActivity) {
-        this.baseActivity = baseActivity;
+    public BaseViewModel(BaseRouter router) {
+        this.router = router;
     }
 
-    public BaseActivity getBaseActivity() {
-        return baseActivity;
-    }
-
-    public Context getContext() {
-        return baseActivity;
+    public Router getRouter() {
+        return router;
     }
 
     public void setLoading(boolean loading) {

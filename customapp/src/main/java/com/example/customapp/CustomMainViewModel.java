@@ -28,25 +28,25 @@ public class CustomMainViewModel extends FirstFeatureListViewModel {
 
     @Override
     protected void createAdapter() {
-        rendererRecyclerViewAdapter = new RendererRecyclerViewAdapter();
-        rendererRecyclerViewAdapter.registerRenderer(
-                new ListItemRenderer(ListItem.class, getContext(), com.example.sdk.R.layout.layout_list_item,
-                        item -> Screens.showDetails(getContext(), item.getId())));
-
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-
-        listConfig = new ListConfig.Builder(rendererRecyclerViewAdapter)
-                .setHasFixedSize(true)
-                .setLayoutManagerProvider(context -> layoutManager)
-                .addOnScrollListener(new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        super.onScrolled(recyclerView, dx, dy);
-
-                        scrolledPosition.set(String.valueOf(layoutManager.findFirstVisibleItemPosition()));
-                    }
-                })
-                .build(getContext());
+//        rendererRecyclerViewAdapter = new RendererRecyclerViewAdapter();
+//        rendererRecyclerViewAdapter.registerRenderer(
+//                new ListItemRenderer(ListItem.class, getContext(), com.example.sdk.R.layout.layout_list_item,
+//                        item -> Screens.showDetails(getContext(), item.getId())));
+//
+//        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//
+//        listConfig = new ListConfig.Builder(rendererRecyclerViewAdapter)
+//                .setHasFixedSize(true)
+//                .setLayoutManagerProvider(context -> layoutManager)
+//                .addOnScrollListener(new RecyclerView.OnScrollListener() {
+//                    @Override
+//                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                        super.onScrolled(recyclerView, dx, dy);
+//
+//                        scrolledPosition.set(String.valueOf(layoutManager.findFirstVisibleItemPosition()));
+//                    }
+//                })
+//                .build(getContext());
     }
 
     public ObservableField<String> getScrolledPosition() {

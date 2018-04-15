@@ -24,7 +24,7 @@ public class FirstFeatureListViewModel extends BaseViewModel {
 
     @Inject
     public FirstFeatureListViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
-        super(baseActivity);
+        super(null);
         setLoading(true);
 
         this.mainRepository = repository;
@@ -42,14 +42,14 @@ public class FirstFeatureListViewModel extends BaseViewModel {
     }
 
     protected void createAdapter() {
-        rendererRecyclerViewAdapter = new RendererRecyclerViewAdapter();
-        rendererRecyclerViewAdapter.registerRenderer(
-                new DataBindingRenderer<>(ListItem.class, getContext(), R.layout.layout_list_item,
-                        item -> Screens.showDetails(getContext(), item.getId())));
-
-        listConfig = new ListConfig.Builder(rendererRecyclerViewAdapter)
-                .setHasFixedSize(true)
-                .build(getContext());
+//        rendererRecyclerViewAdapter = new RendererRecyclerViewAdapter();
+//        rendererRecyclerViewAdapter.registerRenderer(
+//                new DataBindingRenderer<>(ListItem.class, getContext(), R.layout.layout_list_item,
+//                        item -> Screens.showDetails(getContext(), item.getId())));
+//
+//        listConfig = new ListConfig.Builder(rendererRecyclerViewAdapter)
+//                .setHasFixedSize(true)
+//                .build(getContext());
     }
 
     public ListConfig getListConfig() {

@@ -20,7 +20,7 @@ public class FirstFeatureDetailsViewModel extends BaseViewModel {
 
     @Inject
     public FirstFeatureDetailsViewModel(BaseActivity baseActivity, FirstFeatureRepository repository) {
-        super(baseActivity);
+        super(null);
         this.mainRepository = repository;
     }
 
